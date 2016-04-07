@@ -83,7 +83,9 @@
           var location = "pebblejs://close#" + ls_pto;
           console.log("Warping to: " + location);
           console.log(location);
-          document.return_to = location;
+          var return_to = getQueryParam('return_to', 'pebblejs://close#');
+          // was document.location = location;
+          document.location = return_to + ls_pto;
         });
       });
     </script>
