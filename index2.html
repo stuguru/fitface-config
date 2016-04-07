@@ -1,18 +1,5 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Example Configuration</title>
-  </head>
-  <body>
-    <p>This is an example HTML forms configuration page.</p>
-    <input id='background_color_input' type='text' value='#000000'>
-      Background Color
-    </input>
-    <input id='foreground_color_input' type='text' value='#000000'>
-      Foreground Color
-    </input>
-    <input id='submit_button' type='button' value='Save'>
-  </body>
   <script>
   // Get a handle to the button's HTML element
   var submitButton = document.getElementById('submit_button');
@@ -49,4 +36,18 @@
     document.location = return_to + encodeURIComponent(JSON.stringify(options));
   });
   </script>
+  <head>
+    <title>Example Configuration</title>
+  </head>
+  <body>
+    <p>This is an example HTML forms configuration page.</p>
+    <input id='background_color_input' type='text' value='#000000'>
+      Background Color
+    </input>
+    <input id='foreground_color_input' type='text' value='#000000'>
+      Foreground Color
+    </input>
+    <input id='submit_button' type='button' value='Save'>
+  </body>
+  
 </html>
