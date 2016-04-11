@@ -1,0 +1,49 @@
+{
+    "appKeys": {
+        "KEY_COLOR_BLUE_BG": 2,
+        "KEY_COLOR_GREEN_BG": 1,
+        "KEY_COLOR_RED_BG": 0,
+        "KEY_HIGH_CONTRAST": 3
+    },
+    "capabilities": [
+        "configurable",
+        "health"
+    ],
+    "companyName": "stu.guru@gmail.com",
+    "enableMultiJS": false,
+    "longName": "Fit Face",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "fonts/Roboto-Bold.ttf",
+                "name": "FONT_ROBOTO_10",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "file": "fonts/Roboto-Bold.ttf",
+                "name": "FONT_ROBOTO_18",
+                "targetPlatforms": null,
+                "type": "font"
+            },
+            {
+                "file": "fonts/DS-DIGIB.TTF",
+                "name": "FONT_DS_DIGITAL_56",
+                "targetPlatforms": null,
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "Fit Face",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "66154abd-d09d-4e68-b0c1-741085654a67",
+    "versionLabel": "1.02",
+    "watchapp": {
+        "watchface": true
+    }
+}
