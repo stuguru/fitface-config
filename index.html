@@ -1,93 +1,104 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Fit Face Settings</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css" />
-    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
+  <title>Fit Face Configuration</title>
+  <link rel='stylesheet' type='text/css' href='css/slate.min.css'>
+  <script src='js/slate.min.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
   </head>
+
   <body>
-    <div data-role="page" id="main">
-      <div data-role="header" class="jqm-header">
-        <h1>Fit Face Settings</h1>
-      </div>
+    <h1 class='title'>Fit Face Configuration</h1>
 
-      <div data-role="content">
-
-<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="false">
-    <div data-role="collapsible">
-        <h3>General</h3>
-
-<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
-    <legend>Foreground Color</legend>
-        <input name="key0" id="key0-0" data-type="int" value="0" checked="checked" type="radio">
-        <label for="key0-0">Lime Green</label>
-        <input name="key0" id="key0-1" data-type="int" value="1" type="radio">
-        <label for="key0-1">Yellow</label>
-        <input name="key0" id="key0-2" data-type="int" value="2" type="radio">
-        <label for="key0-2">White</label>
-</fieldset>
-
-<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
-    <legend>Date Color</legend>
-        <input name="key1" id="key1-0" data-type="int" value="0" type="radio">
-        <label for="key1-0">Lime Green</label>
-        <input name="key1" id="key1-1" data-type="int" value="1" type="radio">
-        <label for="key1-1">Yellow</label>
-        <input name="key1" id="key1-2" data-type="int" value="2" checked="checked" type="radio">
-        <label for="key1-2">White</label>
-</fieldset>
-
-</div>
-<br />
-        <div class="ui-body ui-body-c">
-          <fieldset class="ui-grid-a">
-              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
-              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
-          </fieldset>
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
         </div>
       </div>
     </div>
-    <script>
-      function saveOptions() {
-        var options = {
-          'option0':     Number( $("input[name=key0]:checked").val() ),
-      	  'option1':     Number( $("input[name=key1]:checked").val() )
-        }
-        return options;
-      }
-      $().ready(function() {
-       if (typeof window.localStorage !== "undefined") {
-       	console.log("Not undefined :)");
-        if (window.localStorage.fitface) {
-          ls_pto = JSON.parse(window.localStorage.fitface);
-          // the Pebble webview dies on the next line...
-          $("input[name=key0][id=key0-"+ls_pto["option0"]+"]").prop('checked',true);
-          $("input[name=key0]").checkboxradio('refresh');
-          $("input[name=key1][id=key1-"+ls_pto["option1"]+"]").prop('checked',true);
-          $("input[name=key1]").checkboxradio('refresh');
-        }
-       }
-        $("#b-cancel").click(function() {
-          console.log("Cancel");
-          document.location = "pebblejs://close";
-        });
-        $("#b-submit").click(function() {
-          console.log("Submit");
-          ls_pto = JSON.stringify(saveOptions());
-          if (typeof window.localStorage !== "undefined") {
-            window.localStorage.fitface = ls_pto;
-          }
-          var location = "pebblejs://close#" + ls_pto;
-          console.log("Warping to: " + location);
-          console.log(location);
-          var return_to = getQueryParam('return_to', 'pebblejs://close#');
-          // was document.location = location;
-          document.location = return_to + ls_pto;
-        });
-      });
-    </script>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's background color. Note: Only available on Basalt watches that support many colors.
+      </div>
+  
+      <div class='item-container-content'>
+        <label class='item'>
+          Clock and Health Stats Color
+          <input id='clockHealth_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the color for the clock and health stats. Note: Only available on Basalt watches that support many colors.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
   </body>
+  <script>
+  function getConfigData() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var clockHealthColorPicker = document.getElementById('clockHealth_color_picker');
+ 
+    var options = {
+      'background_color': backgroundColorPicker.value,
+      'clock_color': clockHealthColorPicker.value
+    };
+    // Save for next launch
+    localStorage['background_color'] = options['background_color'];
+    localStorage['clock_color'] = options['clock_color'];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  (function() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var clockHealthColorPicker = document.getElementById('clockHealth_color_picker');
+    // Load any previously saved configuration, if available
+    if(localStorage['high_contrast']) {
+      clockHealthColorPicker.checked = localStorage['background_color'];
+      backgroundColorPicker.value = localStorage['clock_color'];
+    }
+  })();
+  </script>
 </html>
