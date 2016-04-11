@@ -37,20 +37,17 @@
         </label>
       </div>
       <div class='item-container-footer'>
-        Choose the app's background color. Used if High Contrast Mode is not selected. Note: Only available on Basalt watches that support many colors.
+        Choose the app's background color. Note: Only available on Basalt watches that support many colors.
       </div>
-    </div>
-
-    <div class='item-container'>
-      <div class='item-container-header'>Accessibility</div>
+  
       <div class='item-container-content'>
         <label class='item'>
-          High Contrast Mode
-          <input id='high_contrast_checkbox' type='checkbox' class='item-toggle'>
+          Clock and Health Stats Color
+          <input id='clockHealth_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
         </label>
       </div>
       <div class='item-container-footer'>
-        This switches the app colors to a higher contrast set that promotes readability in low light.
+        Choose the color for the clock and health stats. Note: Only available on Basalt watches that support many colors.
       </div>
     </div>
 
@@ -63,15 +60,15 @@
   <script>
   function getConfigData() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
-    var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var clockHealthColorPicker = document.getElementById('clockHealth_color_picker');
  
     var options = {
       'background_color': backgroundColorPicker.value,
-      'high_contrast': highContrastCheckbox.checked
+      'clock_color': clockHealthColorPicker.value
     };
     // Save for next launch
     localStorage['background_color'] = options['background_color'];
-    localStorage['high_contrast'] = options['high_contrast'];
+    localStorage['clock_color'] = options['clock_color'];
     console.log('Got options: ' + JSON.stringify(options));
     return options;
   }
@@ -96,11 +93,11 @@
   });
   (function() {
     var backgroundColorPicker = document.getElementById('background_color_picker');
-    var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var clockHealthColorPicker = document.getElementById('clockHealth_color_picker');
     // Load any previously saved configuration, if available
     if(localStorage['high_contrast']) {
-      highContrastCheckbox.checked = JSON.parse(localStorage['high_contrast']);
-      backgroundColorPicker.value = localStorage['background_color'];
+      clockHealthColorPicker.checked = localStorage['background_color'];
+      backgroundColorPicker.value = localStorage['clock_color'];
     }
   })();
   </script>
