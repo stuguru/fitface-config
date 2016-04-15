@@ -95,9 +95,10 @@
     var backgroundColorPicker = document.getElementById('background_color_picker');
     var clockHealthColorPicker = document.getElementById('clockHealth_color_picker');
     // Load any previously saved configuration, if available
-    if(localStorage['high_contrast']) {
-      clockHealthColorPicker.checked = localStorage['background_color'];
-      backgroundColorPicker.value = localStorage['clock_color'];
+    if(!localStorage.getItem['background_color'] === null) {
+      backgroundColorPicker.checked = localStorage['background_color'];
+      clockHealthColorPicker.value = localStorage['clock_color'];
+      
     }
   })();
   </script>
